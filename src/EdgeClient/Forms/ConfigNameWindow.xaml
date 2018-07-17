@@ -1,0 +1,29 @@
+﻿<Window x:Class="EdgeClient.Forms.ConfigNameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EdgeClient.Forms"
+        mc:Ignorable="d"
+        Title="请输入配置名称" Height="150" Width="300" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="27"/>
+            <Setter Property="Width" Value="80"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TextBox Grid.Row="0" Grid.Column="0" Name="txtEdgeConfigName" Grid.ColumnSpan="2" Width="250" Height="27"></TextBox>
+        <Button Grid.Row="1" Grid.Column="0" Name="btnOk" Click="btnOk_Click">确定</Button>
+        <Button Grid.Row="1" Grid.Column="1" Name="btnCancel" Click="btnCancel_Click">取消</Button>
+    </Grid>
+</Window>

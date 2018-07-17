@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdgeClient", "EdgeClient\EdgeClient.csproj", "{2A4B81B4-4F1F-43AF-8163-79580DF6DDCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperNodeClient", "SuperNodeClient\SuperNodeClient.csproj", "{7FCFD74F-33F4-405B-B18A-0AB8899870DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A4B81B4-4F1F-43AF-8163-79580DF6DDCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A4B81B4-4F1F-43AF-8163-79580DF6DDCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A4B81B4-4F1F-43AF-8163-79580DF6DDCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A4B81B4-4F1F-43AF-8163-79580DF6DDCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FCFD74F-33F4-405B-B18A-0AB8899870DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FCFD74F-33F4-405B-B18A-0AB8899870DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FCFD74F-33F4-405B-B18A-0AB8899870DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FCFD74F-33F4-405B-B18A-0AB8899870DC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {682DB956-C72D-4E8C-AD9D-A615B3141F7E}
+	EndGlobalSection
+EndGlobal
