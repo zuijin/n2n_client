@@ -107,6 +107,7 @@ namespace EdgeClient.Forms
         {
             var configName = (string)((MenuItem)sender).Header;
 
+            _config = ConfigManager.GetConfig();
             _config.CurrentEdgeConfigName = configName;
             ConfigManager.SaveConfig(_config);
 
