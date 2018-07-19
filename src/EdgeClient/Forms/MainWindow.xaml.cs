@@ -1,20 +1,13 @@
 ﻿using EdgeClient.Model;
 using EdgeClient.Tools;
+using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace EdgeClient.Forms
 {
@@ -23,11 +16,25 @@ namespace EdgeClient.Forms
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// 托盘图标
+        /// </summary>
         private System.Windows.Forms.NotifyIcon _notifyIcon;
-
+        /// <summary>
+        /// edge线程
+        /// </summary>
         private Process _edgeProcess;
+        /// <summary>
+        /// 是否已启动edge线程
+        /// </summary>
         private bool _isStarted = false;
+        /// <summary>
+        /// 客户端配置
+        /// </summary>
         private Config _config;
+        /// <summary>
+        /// edge配置
+        /// </summary>
         private EdgeConfig _edgeConfig;
 
         public MainWindow()
@@ -44,9 +51,28 @@ namespace EdgeClient.Forms
                 Connect(_config.CurrentEdgeConfigName);
             }
 
+            //系统唤醒
+            SystemEvents.PowerModeChanged += SystemEvents_PowerModeChanged;
+            
+            //刷新状态栏和菜单
             RefreshStatus();
 
+            //设置系统托盘图标
             SetNotifyIcon();
+        }
+
+        /// <summary>
+        /// 系统唤醒，重新连接
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SystemEvents_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
+        {
+            if (_isStarted && e.Mode == PowerModes.Resume)
+            {
+                menuDisconnect_Click(this, null);
+                Connect(_config.CurrentEdgeConfigName);
+            }
         }
 
         /// <summary>
