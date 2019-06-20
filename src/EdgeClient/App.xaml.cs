@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EdgeClient.Tools;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -23,7 +24,11 @@ namespace EdgeClient
         {
             base.OnStartup(e);
 
+            StartNetManager();
+
             CheckAdministrator();
+
+            Console.Write("");
         }
 
         /// <summary>
@@ -52,10 +57,27 @@ namespace EdgeClient
                     Process.Start(processInfo);
                 }
                 catch { }
-                
+
                 // Shut down the current process
                 Environment.Exit(0);
             }
+        }
+
+        /// <summary>
+        /// 打开网络连接窗口
+        /// </summary>
+        private void StartNetManager()
+        {
+            var p = ProcessHelper.StartProcess(new Model.ExcuteInfo()
+            {
+                FileName = @"cmd.exe"
+            }, (sender, e) => { });
+
+            p.StandardInput.WriteLine("ncpa.cpl & exit");
+            p.StandardInput.AutoFlush = true;
+            p.WaitForExit();
+
+            p.Close();
         }
     }
 }
