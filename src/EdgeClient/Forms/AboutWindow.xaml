@@ -5,8 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EdgeClient"
         mc:Ignorable="d"
-        Title="关于 N2N Client" Height="160" Width="340" ResizeMode="NoResize">
+        Title="关于 N2N Client" Height="100" Width="300" ResizeMode="NoResize">
     <Grid>
-        
+        <Grid Margin="10 ">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">
+                <Label Content="GitHub:" HorizontalAlignment="Right"></Label>
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock>
+                    <Hyperlink NavigateUri="https://github.com/zuijin/n2n_client" Click="Hyperlink_Click" >https://github.com/zuijin/n2n_client</Hyperlink>
+                </TextBlock>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
