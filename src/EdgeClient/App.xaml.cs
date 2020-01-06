@@ -24,11 +24,9 @@ namespace EdgeClient
         {
             base.OnStartup(e);
 
-            StartNetManager();
+            //StartNetManager();
 
             CheckAdministrator();
-
-            Console.Write("");
         }
 
         /// <summary>
@@ -71,7 +69,10 @@ namespace EdgeClient
             var p = ProcessHelper.StartProcess(new Model.ExcuteInfo()
             {
                 FileName = @"cmd.exe"
-            }, (sender, e) => { });
+            }, (sender, e) =>
+            {
+
+            });
 
             p.StandardInput.WriteLine("ncpa.cpl & exit");
             p.StandardInput.AutoFlush = true;
