@@ -17,103 +17,108 @@ namespace EdgeClient.Tools
         /// <returns></returns>
         public static ExcuteInfo GetExcuteInfo(EdgeConfig config)
         {
-            var version = config.Version;
-            switch (version)
-            {
-                case "v1":
-                    return GetExcuteInfoV1(config);
-                case "v2":
-                    return GetExcuteInfoV2(config);
-                case "v2.1":
-                    return GetExcuteInfoV2_1(config);
-                default:
-                    throw new Exception("不支持的版本");
-            }
-        }
+			switch (config.Version)
+			{
+				case "v1":
+					return GetExcuteInfoV1(config);
+				case "v2":
+					return GetExcuteInfoV2(config);
+				case "v2.7":
+					return GetExcuteInfoV27(config);
+				case "v2s":
+					return GetExcuteInfoV2s(config);
+				case "v3":
+					return GetExcuteInfoV3(config);
+				default:
+					throw new Exception("不支持的版本");
+			}
+		}
 
-        private static ExcuteInfo GetExcuteInfoV1(EdgeConfig config)
-        {
-            return new ExcuteInfo()
-            {
-                FileName = $"{AppDomain.CurrentDomain.BaseDirectory}/EdgeFile/edge.exe",
-                Args = BuilArgs(config)
-            };
-        }
+		private static ExcuteInfo GetExcuteInfoV1(EdgeConfig config)
+		{
+			return new ExcuteInfo
+			{
+				FileName = AppDomain.CurrentDomain.BaseDirectory + "/EdgeFile/edge.1.exe",
+				Args = BuilArgs(config)
+			};
+		}
 
-        private static ExcuteInfo GetExcuteInfoV2(EdgeConfig config)
-        {
-            return new ExcuteInfo()
-            {
-                FileName = $"{AppDomain.CurrentDomain.BaseDirectory}/EdgeFile/edge2.exe",
-                Args = BuilArgs(config)
-            };
-        }
+		private static ExcuteInfo GetExcuteInfoV2(EdgeConfig config)
+		{
+			return new ExcuteInfo
+			{
+				FileName = AppDomain.CurrentDomain.BaseDirectory + "/EdgeFile/edge.2.exe",
+				Args = BuilArgs(config)
+			};
+		}
 
-        private static ExcuteInfo GetExcuteInfoV2_1(EdgeConfig config)
-        {
-            return new ExcuteInfo()
-            {
-                FileName = $"{AppDomain.CurrentDomain.BaseDirectory}/EdgeFile/edge21.exe",
-                Args = BuilArgs(config)
-            };
-        }
+		private static ExcuteInfo GetExcuteInfoV27(EdgeConfig config)
+		{
+			return new ExcuteInfo
+			{
+				FileName = AppDomain.CurrentDomain.BaseDirectory + "/EdgeFile/edge.2.7.exe",
+				Args = BuilArgs(config)
+			};
+		}
 
-        /// <summary>
-        /// 组装参数
-        /// </summary>
-        /// <param name="config"></param>
-        /// <returns></returns>
-        private static string BuilArgs(EdgeConfig config)
-        {
-            List<string> args = new List<string>();
+		private static ExcuteInfo GetExcuteInfoV2s(EdgeConfig config)
+		{
+			return new ExcuteInfo
+			{
+				FileName = AppDomain.CurrentDomain.BaseDirectory + "/EdgeFile/edge.2s.exe",
+				Args = BuilArgs(config)
+			};
+		}
 
-            args.Add($"-d n2n{_random.Next()}");
-            args.Add($"-a {config.EdgeIP}");
-            args.Add($"-c {config.EdgeGroup}");
-            args.Add($"-k {config.EdgePassword}");
-            args.Add($"-l {config.SuperNodeIP}:{config.SuperNodePort}");
+		private static ExcuteInfo GetExcuteInfoV3(EdgeConfig config)
+		{
+			return new ExcuteInfo
+			{
+				FileName = AppDomain.CurrentDomain.BaseDirectory + "/EdgeFile/edge.3.exe",
+				Args = BuilArgs(config)
+			};
+		}
 
-            if (!string.IsNullOrEmpty(config.EdgeNetmask))
-            {
-                args.Add($"-s {config.EdgeNetmask}");
-            }
-
-            if (config.ResolveSuperNode)
-            {
-                args.Add($"-b");
-            }
-
-            if (config.PacketForwarding)
-            {
-                args.Add($"-r");
-            }
-
-            if (config.Multicast)
-            {
-                args.Add($"-E");
-            }
-
-            if (config.Verbose)
-            {
-                args.Add($"-v");
-            }
-
-            if (config.LocalPort > 0)
-            {
-                args.Add($"-p {config.LocalPort}");
-            }
-
-            if (!string.IsNullOrEmpty(config.MacAddress))
-            {
-                args.Add($"-m {config.MacAddress}");
-            }
-            
-            if (config.MTU > 0)
-            {
-                args.Add($"-M {config.MTU}");
-            }
-            
-            return string.Join(" ", args.ToArray());
-        }
-    }
+		private static string BuilArgs(EdgeConfig config)
+		{
+			List<string> list = new List<string>();
+			list.Add("-a " + config.EdgeIP);
+			list.Add("-c " + config.EdgeGroup);
+			list.Add("-k " + config.EdgePassword);
+			list.Add($"-l {config.SuperNodeIP}:{config.SuperNodePort}");
+			if (!string.IsNullOrEmpty(config.EdgeNetmask))
+			{
+				list.Add("-s " + config.EdgeNetmask);
+			}
+			if (config.ResolveSuperNode)
+			{
+				list.Add("-b");
+			}
+			if (config.PacketForwarding)
+			{
+				list.Add("-r");
+			}
+			if (config.Multicast)
+			{
+				list.Add("-E");
+			}
+			if (config.Verbose)
+			{
+				list.Add("-v");
+			}
+			if (config.LocalPort > 0)
+			{
+				list.Add($"-p {config.LocalPort}");
+			}
+			if (!string.IsNullOrEmpty(config.MacAddress))
+			{
+				list.Add("-m " + config.MacAddress);
+			}
+			if (config.MTU > 0)
+			{
+				list.Add($"-M {config.MTU}");
+			}
+			return string.Join(" ", list.ToArray());
+		}
+	}
 }

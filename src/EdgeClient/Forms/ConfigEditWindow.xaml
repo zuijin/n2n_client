@@ -54,6 +54,7 @@
                     <Label>v1</Label>
                     <Label>v2</Label>
                     <Label>v2.1</Label>
+                    <Label>v3</Label>
                 </ComboBox>
 
                 <Label Grid.Row="1" Grid.Column="0">中心节点：</Label>
